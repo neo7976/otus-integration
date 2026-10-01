@@ -59,7 +59,7 @@ public class KitchenFlowConfig {
                         headers.get(ORDER_ID_HEADER, Long.class),
                         headers.get(TABLE_HEADER, Integer.class),
                         dishes))
-                .log(LoggingHandler.Level.INFO, "order.served", m -> "Заказ готов: " + m.getPayload())
-                .get();
+                // log() в конце потока поглощает сообщение, и gateway не получил бы ответ
+                .logAndReply(LoggingHandler.Level.INFO, "order.served", m -> "Заказ готов: " + m.getPayload());
     }
 }

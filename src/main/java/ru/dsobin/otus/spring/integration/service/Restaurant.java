@@ -9,7 +9,7 @@ import ru.dsobin.otus.spring.integration.model.ServedOrder;
  * Точка входа в процесс. Реализацию генерирует Spring Integration:
  * вызов метода отправляет заказ в канал ordersChannel и ждёт ответ из потока.
  */
-@MessagingGateway
+@MessagingGateway(defaultReplyTimeout = "5000")
 public interface Restaurant {
 
     @Gateway(requestChannel = "ordersChannel")
